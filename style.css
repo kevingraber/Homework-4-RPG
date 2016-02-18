@@ -1,0 +1,28 @@
+img {
+	width:200px;
+	height:300px;
+}
+
+.selectable {
+	border-style:solid;
+	border-color:lightgreen;
+	border-width:5px;
+}
+
+.playerCharacter {
+	border-style:solid;
+	border-color:darkgreen;
+	border-width:5px;
+}
+
+.passiveOpponent {
+	border-style:solid;
+	border-color:red;
+	border-width:5px;
+}
+
+.activeOpponent {
+	border-style:solid;
+	border-color:darkred;
+	border-width:5px;
+}

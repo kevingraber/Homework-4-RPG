@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Star Wars</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- Linking jQuery -->
+	<script src="jquery-1.12.0.min.js"></script>
+</head>
+<body>
+
+<!-- Page Skeleton -->
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-12 text-center"><h1>Star Wars RPG</h1></div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center"><h2>Choose Your Character</h2></div>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="row">
+		<div class="col-md-3">
+			<button class="fight">fight</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">
+			<div class="box"><img class="selectable" id="luke" src="images/luke.jpg"></div>
+		</div>
+		<div class="col-md-3">
+			<div class="box"><img class="selectable" id="driod" src="images/driod.png"></div>
+		</div>
+		<div class="col-md-3">
+			<div class="box"><img class="selectable" id="vader" src="images/vader.jpg"></div>
+		</div>
+		<div class="col-md-3">
+			<div class="box"><img class="selectable" id="emperor" src="images/emperor.png"></div>
+		</div>
+  	</div>
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+
+
+var luke = {
+
+	name: "Luke Skywalker",
+	health: 100,
+	baseAttackPower: 10,
+	currentAttackPower: 10,
+	counterAttackPower: 10,
+
+	attack: function(opponent) {
+		opponent.health = (opponent.health - this.currentAttackPower);
+		alert("You did " + this.currentAttackPower + " damage to " + opponent.name + ", they now have " + opponent.health + " health!");
+		if (opponent.health <= 0) {
+			alert("You slew " + opponent.name + "!");
+		};
+		this.currentAttackPower = (this.currentAttackPower + this.baseAttackPower);
+		alert("Your attack power increases to " + this.currentAttackPower + "!");
+		this.health = this.health - opponent.counterAttackPower;
+		alert(opponent.name + " hits you back for " + opponent.counterAttackPower + " ouch! You have " + this.health + " hit points remaining!");
+	},
+
+};
+
+var driod = {
+	name: "Battle Driod",
+	health: 120,
+	baseAttackPower: 12,
+	counterAttackPower: 15
+};
+
+var vader = {
+	name: "Darth Vader",
+	health: 150,
+	baseAttackPower: 15,
+	counterAttackPower: 20
+};
+
+var emperor = {
+	name: "Emperor Palpatine",
+	health: 175,
+	baseAttackPower: 18,
+	counterAttackPower: 22
+};
+
+// function fight(person1, person2) {
+// 	person2.health = (person2.health - person1.baseAttackPower);
+// 	person1. 
+// }
+
+// fight(luke, driod);
+
+var playerCharacter = "";
+
+function chooseCharacter() {
+	$(".selectable").click(function() {
+		playerCharacter = $(this).attr("id");
+		alert(playerCharacter + " is the chosen character!");
+		$(this).addClass("playerCharacter");
+		$(this).removeClass("selectable")
+		$(".selectable").addClass("passiveOpponent").removeClass("selectable");
+	});
+};
+
+
+
+function chooseOpponent() {
+	$(".passiveOpponent").click(function() {
+		$(this).addClass("activeOpponent");
+		$(this).removeClass("passiveOpponent");
+	});
+};
+
+chooseCharacter();
+chooseOpponent();
+// $(".selectable").click(function() {
+// 	$(this).addClass("playerCharacter");
+// });
+
+
+$(".fight").click(function() {
+	luke.attack(driod);
+});
+
+</script>
+
+</body>
+</html>
