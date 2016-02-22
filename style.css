@@ -1,6 +1,11 @@
 img {
-	width:200px;
-	height:300px;
+	width:150px;
+	height:150px;
+	border-radius: 100px
+}
+
+.selectable:hover {
+	border-color:darkgreen;
 }
 
 .selectable {
@@ -25,4 +30,28 @@ img {
 	border-style:solid;
 	border-color:darkred;
 	border-width:5px;
+}
+
+/*.box {
+	background-color: lightblue;
+}
+*/
+.hide {
+	display:hidden;
+}
+
+.show {
+	display:static;
+}
+
+.combatLog {
+	height:50px;
+}
+
+.characterDisplay {
+	height:25px;
+}
+
+.opponentDisplay {
+	height:25px;
 }

@@ -36,46 +36,42 @@
 		<div class="col-md-12 combatLog text-center"></div>
 	</div>
 	<br>
+	<br>
+	<br>
 	<div class="row">
-		<div class="col-md-12  text-center">
-			<button class="fight btn btn-danger btn-lg">Fight!</button>
+		<div class="col-md-3">
+			<button class="fight">fight</button>
 		</div>
 	</div>
-	<br>
-	<br>
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2 text-center">
-
-			<div class="col-md-3">
-				<div class="box lukebox">
-					<p>Luke Skywalker</p>
-					<p>Health: <span id="lukeHealth">100</span></p>
-					<img class="selectable" id="luke" src="images/luke.jpg">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="box robotbox">
-					<p>Battle Robot</p>
-					<p>Health: <span id="robotHealth">120</span></p>
-					<img class="selectable" id="robot" src="images/robot.png">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="box vaderbox">
-					<p>Darth Vader</p>
-					<p>Heath: <span id="vaderHealth">150</span></p>
-					<img class="selectable" id="vader" src="images/vader.jpg">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="box emperorbox">
-					<p>Emperor Palpatine</p>
-					<p>Health: <span id="emperorHealth">175</span></p>
-					<img class="selectable" id="emperor" src="images/emperor.png">
-				</div>
+		<div class="col-md-3">
+			<div class="box selectable">
+				<p>Luke Skywalker</p>
+				<p>Health: <span id="lukeHealth">100</span></p>
+				<img id="luke" src="images/luke.jpg">
 			</div>
 		</div>
-
+		<div class="col-md-3">
+			<div class="box">
+				<p>Battle Robot</p>
+				<p>Health: <span id="robotHealth">120</span></p>
+				<img class="selectable" id="robot" src="images/robot.png">
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="box">
+				<p>Darth Vader</p>
+				<p>Heath: <span id="vaderHealth">150</span></p>
+				<img class="selectable" id="vader" src="images/vader.jpg">
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="box">
+				<p>Emperor Palpatine</p>
+				<p>Health: <span id="emperorHealth">175</span></p>
+				<img class="selectable" id="emperor" src="images/emperor.png">
+			</div>
+		</div>
   	</div>
 </div>
 
@@ -89,8 +85,7 @@ var luke = {
 	health: 100,
 	baseAttackPower: 15,
 	currentAttackPower: 15,
-	counterAttackPower: 10,
-	id: "luke"
+	counterAttackPower: 10
 };
 
 var robot = {
@@ -99,8 +94,7 @@ var robot = {
 	startingHealth: 120,
 	baseAttackPower: 12,
 	currentAttackPower: 12,
-	counterAttackPower: 15,
-	id: "robot"
+	counterAttackPower: 15
 };
 
 var vader = {
@@ -109,8 +103,7 @@ var vader = {
 	startingHealth: 150,
 	baseAttackPower: 15,
 	currentAttackPower: 15,
-	counterAttackPower: 20,
-	id: "vader"
+	counterAttackPower: 20
 };
 
 var emperor = {
@@ -119,8 +112,7 @@ var emperor = {
 	startingHealth:175,
 	baseAttackPower: 18,
 	currentAttackPower: 18,
-	counterAttackPower: 22,
-	id: "emperor"
+	counterAttackPower: 22
 };
 
 
@@ -132,17 +124,10 @@ var emperor = {
 // 	});
 // };
 
-function chooseCharacter() {
-	$(".selectable").on('click', function() {
-		$(this).removeClass("selectable").addClass("playerCharacter").off('click');
-		$(".selectable").addClass("passiveOpponent").removeClass("selectable").off('click');
-	});
-};
-
-// function chooseOpponent() {
-// 	$(".passiveOpponent").click(function() {
-// 		$(this).addClass("activeOpponent");
-// 		$(this).removeClass("passiveOpponent");
+// function chooseCharacter() {
+// 	$(".selectable").on('click', function() {
+// 		$(this).addClass("playerCharacter").removeClass("selectable").off('click');
+// 		$(".selectable").addClass("passiveOpponent").removeClass("selectable").off('click');
 // 	});
 // };
 
@@ -152,7 +137,6 @@ function chooseCharacter() {
 // 		$(this).removeClass("passiveOpponent");
 // 	});
 // };
-
 
 // chooseCharacter();
 // chooseOpponent();
@@ -265,11 +249,6 @@ function reset() {
 	emperor.currentAttackPower = emperor.baseAttackPower;
 	$("#emperorHealth").empty();
 	$("#emperorHealth").append(emperor.health);
-
-	$(".lukebox").removeClass("hide");
-	$(".robotbox").removeClass("hide");
-	$(".vaderbox").removeClass("hide");
-	$(".emperorbox").removeClass("hide");
 };
 
 var audioElement = document.createElement('audio');
@@ -298,10 +277,6 @@ function fight() {
 	if ( jQuery.isEmptyObject(playerCharacter) || jQuery.isEmptyObject(opponent)) {
 		alert("You must have a player character & opponent to fight!");
 		return;
-	// wont let you fight if you have the same player character and opponent
-	}else if (playerCharacter == opponent) {
-		alert("You must choose a different opponent!")
-		return;
 	};
 
 	opponent.health = (opponent.health - playerCharacter.currentAttackPower);
@@ -316,13 +291,10 @@ function fight() {
 	playerCharacter.currentAttackPower += playerCharacter.baseAttackPower;
 
 	if (opponent.health <= 0) {
-		// alert("You defeated " + opponent.name + "!");
-		$(".combatLog").append("You defeated " +opponent.name + "! Choose another opponent!")
+		alert("You defeated " + opponent.name + "!");
 		victoryCounter++;
-		$("."+opponent.id+"box").addClass("hide");
 		// clears your current opponent
 		opponent = {};
-		$(".opponentDisplay").empty();
 
 		if (victoryCounter == 3) {
 			alert("you won!");
