@@ -2,19 +2,32 @@
 <html>
 <head>
 	<title>Star Wars</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<!-- Linking jQuery -->
 	<script src="jquery-1.12.0.min.js"></script>
+	<!-- My CSS -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
-<!-- Page Skeleton -->
+<!-- Page Layout -->
 <div class="container">
 
 	<div class="row">
 		<div class="col-md-12 text-center"><h1>Star Wars RPG</h1></div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2>Level Select:</h2>
+			<button id="deathstar">Death Star</button>
+			<button id="hoth">Hoth</button>
+			<button id="stardestroyer">Star Destroyer</button>
+			<button id="endor">Endor</button>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12 text-center"><h2>Choose Your Character</h2></div>
@@ -36,42 +49,55 @@
 		<div class="col-md-12 combatLog text-center"></div>
 	</div>
 	<br>
-	<br>
-	<br>
 	<div class="row">
-		<div class="col-md-3">
-			<button class="fight">fight</button>
+		<div class="col-md-12  text-center">
+			<button class="fight btn btn-danger btn-lg">Fight!</button>
 		</div>
 	</div>
+	<br>
+	<br>
 	<div class="row">
-		<div class="col-md-3">
-			<div class="box selectable">
-				<p>Luke Skywalker</p>
-				<p>Health: <span id="lukeHealth">100</span></p>
-				<img id="luke" src="images/luke.jpg">
+		<div class="col-md-8 col-md-offset-2 text-center">
+
+			<div class="col-md-3">
+				<div class="box lukebox character">
+					<p>Luke Skywalker</p>
+					<p>Health: <span id="lukeHealth">100</span></p>
+					<img class="selectable" id="luke" src="images/luke.jpg">
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="box robotbox character">
+					<p>Battle Robot</p>
+					<p>Health: <span id="robotHealth">120</span></p>
+					<img class="selectable" id="robot" src="images/robot.png">
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="box vaderbox character">
+					<p>Darth Vader</p>
+					<p>Heath: <span id="vaderHealth">150</span></p>
+					<img class="selectable" id="vader" src="images/vader.jpg">
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="box emperorbox character">
+					<p>Emperor Palpatine</p>
+					<p>Health: <span id="emperorHealth">175</span></p>
+					<img class="selectable" id="emperor" src="images/emperor.png">
+				</div>
 			</div>
 		</div>
-		<div class="col-md-3">
-			<div class="box">
-				<p>Battle Robot</p>
-				<p>Health: <span id="robotHealth">120</span></p>
-				<img class="selectable" id="robot" src="images/robot.png">
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="box">
-				<p>Darth Vader</p>
-				<p>Heath: <span id="vaderHealth">150</span></p>
-				<img class="selectable" id="vader" src="images/vader.jpg">
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="box">
-				<p>Emperor Palpatine</p>
-				<p>Health: <span id="emperorHealth">175</span></p>
-				<img class="selectable" id="emperor" src="images/emperor.png">
-			</div>
-		</div>
+
+  	</div>
+  	<div class="row">
+  		<div class="waitingzone col-md-6 col-md-offset-3">
+  			
+  		</div>
+  	</div>
+  	<div class="row">
+		<div class="col-md-6 characterspot"></div>
+		<div class="col-md-6 opponentspot"></div>
   	</div>
 </div>
 
@@ -85,7 +111,8 @@ var luke = {
 	health: 100,
 	baseAttackPower: 15,
 	currentAttackPower: 15,
-	counterAttackPower: 10
+	counterAttackPower: 10,
+	id: "luke"
 };
 
 var robot = {
@@ -94,7 +121,8 @@ var robot = {
 	startingHealth: 120,
 	baseAttackPower: 12,
 	currentAttackPower: 12,
-	counterAttackPower: 15
+	counterAttackPower: 15,
+	id: "robot"
 };
 
 var vader = {
@@ -103,7 +131,8 @@ var vader = {
 	startingHealth: 150,
 	baseAttackPower: 15,
 	currentAttackPower: 15,
-	counterAttackPower: 20
+	counterAttackPower: 20,
+	id: "vader"
 };
 
 var emperor = {
@@ -112,8 +141,23 @@ var emperor = {
 	startingHealth:175,
 	baseAttackPower: 18,
 	currentAttackPower: 18,
-	counterAttackPower: 22
+	counterAttackPower: 22,
+	id: "emperor"
 };
+
+// Choose your level buttons
+$("#deathstar").click(function() {
+	$("body").css("background-image", "url('deathstar.jpg')");
+});
+$("#hoth").click(function() {
+	$("body").css("background-image", "url('hoth.jpg')");
+});
+$("#stardestroyer").click(function() {
+	$("body").css("background-image", "url('stardestroyer.jpg')");
+});
+$("#endor").click(function() {
+	$("body").css("background-image", "url('endor.jpg')");
+});
 
 
 // function chooseCharacter() {
@@ -126,7 +170,7 @@ var emperor = {
 
 // function chooseCharacter() {
 // 	$(".selectable").on('click', function() {
-// 		$(this).addClass("playerCharacter").removeClass("selectable").off('click');
+// 		$(this).removeClass("selectable").addClass("playerCharacter").off('click');
 // 		$(".selectable").addClass("passiveOpponent").removeClass("selectable").off('click');
 // 	});
 // };
@@ -137,6 +181,14 @@ var emperor = {
 // 		$(this).removeClass("passiveOpponent");
 // 	});
 // };
+
+// function chooseOpponent() {
+// 	$(".passiveOpponent").click(function() {
+// 		$(this).addClass("activeOpponent");
+// 		$(this).removeClass("passiveOpponent");
+// 	});
+// };
+
 
 // chooseCharacter();
 // chooseOpponent();
@@ -160,6 +212,12 @@ $("#luke").click(function() {
 		$(".characterDisplay").append(playerCharacter.name);
 		// This will be used later to make lukes health change when he fights.
 		healthToAppend = "lukeHealth";
+
+		$(".box").click(function() {
+			$(".characterspot").append($(this));
+			// $(this).unbind('.box');
+			// $(".waitingzone").append($(".box"));
+		});
 	// If this isn't the first character clicked (playerCharacter is already populated) make luke an opponent.
 	}else{
 		// Luke becomes the opponent.
@@ -170,6 +228,9 @@ $("#luke").click(function() {
 		$(".opponentDisplay").append(opponent.name);
 		// This will be used later to make lukes health change when he fights.
 		opponentHealthToAppend = "lukeHealth";
+		$(".box").click(function() {
+			$(".opponentspot").append($(this));
+		});
 	};
 });
 
@@ -178,11 +239,17 @@ $("#robot").click(function() {
 		playerCharacter = robot;
 		$(".characterDisplay").append(playerCharacter.name);
 		healthToAppend = "robotHealth";
+		$(".box").click(function() {
+			$(".characterspot").append($(this));
+		});
 	}else{
 		opponent = robot;
 		$(".opponentDisplay").empty();
 		$(".opponentDisplay").append(opponent.name);
 		opponentHealthToAppend = "robotHealth";
+		$(".box").click(function() {
+			$(".opponentspot").append($(this));
+		});
 	};
 });
 
@@ -191,11 +258,17 @@ $("#vader").click(function() {
 		playerCharacter = vader;
 		$(".characterDisplay").append(playerCharacter.name);
 		healthToAppend = "vaderHealth";
+		$(".box").click(function() {
+			$(".characterspot").append($(this));
+		});
 	}else{
 		opponent = vader;
 		$(".opponentDisplay").empty();
 		$(".opponentDisplay").append(opponent.name);
 		opponentHealthToAppend = "vaderHealth";
+		$(".box").click(function() {
+			$(".opponentspot").append($(this));
+		});
 	};
 });
 
@@ -204,11 +277,17 @@ $("#emperor").click(function() {
 		playerCharacter = emperor;
 		$(".characterDisplay").append(playerCharacter.name);
 		healthToAppend = "emperorHealth";
+		$(".box").click(function() {
+			$(".characterspot").append($(this));
+		});
 	}else{
 		opponent = emperor;
 		$(".opponentDisplay").empty();
 		$(".opponentDisplay").append(opponent.name);
 		opponentHealthToAppend = "emperorHealth";
+		$(".box").click(function() {
+			$(".opponentspot").append($(this));
+		});
 	};
 });
 
@@ -249,26 +328,32 @@ function reset() {
 	emperor.currentAttackPower = emperor.baseAttackPower;
 	$("#emperorHealth").empty();
 	$("#emperorHealth").append(emperor.health);
+
+	$(".lukebox").removeClass("hide");
+	$(".robotbox").removeClass("hide");
+	$(".vaderbox").removeClass("hide");
+	$(".emperorbox").removeClass("hide");
 };
 
-var audioElement = document.createElement('audio');
+// Making sound effects on attack
+// var audioElement = document.createElement('audio');
 // var audioNumber = 1;
 // audioElement.setAttribute('src', 'audio.wav');
 
-function attackSound() {
-	audioNumber = Math.floor((Math.random() * 3) + 1);
-	console.log(audioNumber);
+// function attackSound() {
+// 	audioNumber = Math.floor((Math.random() * 3) + 1);
+// 	console.log(audioNumber);
 
-	if (audioNumber == 1) {
-		audioElement.setAttribute('src', 'attack1.wav');
-	} else if (audioNumber == 2) {
-		audioElement.setAttribute('src', 'attack2.wav');
-	} else {
-		audioElement.setAttribute('src', 'attack3.wav');
-	};
+// 	if (audioNumber == 1) {
+// 		audioElement.setAttribute('src', 'attack1.wav');
+// 	} else if (audioNumber == 2) {
+// 		audioElement.setAttribute('src', 'attack2.wav');
+// 	} else {
+// 		audioElement.setAttribute('src', 'attack3.wav');
+// 	};
 
-	audioElement.play();
-}
+// 	audioElement.play();
+// }
 
 
 function fight() {
@@ -277,24 +362,30 @@ function fight() {
 	if ( jQuery.isEmptyObject(playerCharacter) || jQuery.isEmptyObject(opponent)) {
 		alert("You must have a player character & opponent to fight!");
 		return;
+	// wont let you fight if you have the same player character and opponent
+	}else if (playerCharacter == opponent) {
+		alert("You must choose a different opponent!")
+		return;
 	};
 
 	opponent.health = (opponent.health - playerCharacter.currentAttackPower);
 	$(".combatLog").empty();
-	$(".combatLog").append("You attacked " + opponent.name + " for " + playerCharacter.currentAttackPower + " damage! <br>");
+	$(".combatLog").append("<p>You attacked " + opponent.name + " for " + playerCharacter.currentAttackPower + " damage! </p>");
 
 	// attackSound();
 
 	$("#"+opponentHealthToAppend).empty();
 	$("#"+opponentHealthToAppend).append(opponent.health);
-
 	playerCharacter.currentAttackPower += playerCharacter.baseAttackPower;
 
 	if (opponent.health <= 0) {
-		alert("You defeated " + opponent.name + "!");
+		// alert("You defeated " + opponent.name + "!");
+		$(".combatLog").append("<p>You defeated " +opponent.name + "!</p>")
 		victoryCounter++;
+		$("."+opponent.id+"box").addClass("hide");
 		// clears your current opponent
 		opponent = {};
+		$(".opponentDisplay").empty();
 
 		if (victoryCounter == 3) {
 			alert("you won!");
@@ -305,9 +396,7 @@ function fight() {
 	};
 
 	playerCharacter.health = playerCharacter.health - opponent.counterAttackPower;
-	$(".combatLog").append(opponent.name + " attacked you back for " + opponent.counterAttackPower);
-	// $(".playerCharacter").append(playerCharacter.health);
-
+	$(".combatLog").append("<p>"+opponent.name + " attacked you back for " + opponent.counterAttackPower +"</p>");
 	$("#"+healthToAppend).empty();
 	$("#"+healthToAppend).append(playerCharacter.health);
 

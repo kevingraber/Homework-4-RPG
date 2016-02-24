@@ -2,34 +2,85 @@
 <html>
 <head>
 	<title>Star Wars</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<!-- Linking jQuery -->
 	<script src="jquery-1.12.0.min.js"></script>
+	<!-- My CSS -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
-<!-- Page Skeleton -->
+<!-- Page Layout -->
 <div class="container">
 
 	<div class="row">
 		<div class="col-md-12 text-center"><h1>Star Wars RPG</h1></div>
 	</div>
 	<div class="row">
+		<div class="col-md-12 text-center">
+			<h2>Level Select:</h2>
+			<button id="deathstar">Battlefield</button>
+			<button id="hoth">City</button>
+			<button id="stardestroyer">Star Destroyer</button>
+			<button id="endor">Woods</button>
+		</div>
+	</div>
+	<div class="row">
 		<div class="col-md-12 text-center"><h2>Choose Your Character</h2></div>
 	</div>
 	<br>
-	<br>
-	<br>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 text-center startingposition">
+
+			<div class="col-md-3 box lukebox">
+				<div>
+					<p>Luke Skywalker</p>
+					<p>Health: <span id="lukeHealth">100</span></p>
+					<img class="selectable" id="luke" src="images/luke.jpg">
+				</div>
+			</div>
+
+			<div class="col-md-3 box robotbox">
+				<div>
+					<p>Battle Robot</p>
+					<p>Health: <span id="robotHealth">120</span></p>
+					<img class="selectable" id="robot" src="images/robot.png">
+				</div>
+			</div>
+
+			<div class="col-md-3 box vaderbox">
+				<div>
+					<p>Darth Vader</p>
+					<p>Heath: <span id="vaderHealth">150</span></p>
+					<img class="selectable" id="vader" src="images/vader.jpg">
+				</div>
+			</div>
+
+			<div class="col-md-3 box emperorbox">
+				<div>
+					<p>Emperor Palpatine</p>
+					<p>Health: <span id="emperorHealth">175</span></p>
+					<img class="selectable" id="emperor" src="images/emperor.png">
+				</div>
+			</div>
+
+		</div>
+  	</div>
+  	<br>
 	<div class="row">
 		<div class="col-md-6 text-center">
 			<p>Player Character: </p>
-			<p class="characterDisplay"></p>
+			<div class="characterspot text-center"></div>
+			<!-- <p class="characterDisplay"></p> -->
 		</div>
 		<div class="col-md-6 text-center">
 			<p>Opponent:</p>
-			<p class="opponentDisplay"></p>
+			<div class="opponentspot"></div>
+			<!-- <p class="opponentDisplay"></p> -->
 		</div>
 	</div>
 	<div class="row">
@@ -42,40 +93,14 @@
 		</div>
 	</div>
 	<br>
-	<br>
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2 text-center">
-
-			<div class="col-md-3">
-				<div class="box lukebox">
-					<p>Luke Skywalker</p>
-					<p>Health: <span id="lukeHealth">100</span></p>
-					<img class="selectable" id="luke" src="images/luke.jpg">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="box robotbox">
-					<p>Battle Robot</p>
-					<p>Health: <span id="robotHealth">120</span></p>
-					<img class="selectable" id="robot" src="images/robot.png">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="box vaderbox">
-					<p>Darth Vader</p>
-					<p>Heath: <span id="vaderHealth">150</span></p>
-					<img class="selectable" id="vader" src="images/vader.jpg">
-				</div>
-			</div>
-			<div class="col-md-3">
-				<div class="box emperorbox">
-					<p>Emperor Palpatine</p>
-					<p>Health: <span id="emperorHealth">175</span></p>
-					<img class="selectable" id="emperor" src="images/emperor.png">
-				</div>
-			</div>
-		</div>
-
+  	<div class="row">
+  		<div class="waitingzone col-md-8 col-md-offset-2 text-center">
+  			
+  		</div>
+  	</div>
+  	<div class="row">
+		<!-- <div class="col-md-6 characterspot"></div> -->
+		<!-- <div class="col-md-6 opponentspot"></div> -->
   	</div>
 </div>
 
@@ -123,41 +148,19 @@ var emperor = {
 	id: "emperor"
 };
 
-
-// function chooseCharacter() {
-// 	$(".selectable").click(function() {
-// 		$(this).addClass("playerCharacter");
-// 		$(this).removeClass("selectable");
-// 		$(".selectable").addClass("passiveOpponent").removeClass("selectable");
-// 	});
-// };
-
-function chooseCharacter() {
-	$(".selectable").on('click', function() {
-		$(this).removeClass("selectable").addClass("playerCharacter").off('click');
-		$(".selectable").addClass("passiveOpponent").removeClass("selectable").off('click');
+// Choose your level buttons
+	$("#deathstar").click(function() {
+		$("body").css("background-image", "url('deathstar.jpg')");
 	});
-};
-
-// function chooseOpponent() {
-// 	$(".passiveOpponent").click(function() {
-// 		$(this).addClass("activeOpponent");
-// 		$(this).removeClass("passiveOpponent");
-// 	});
-// };
-
-// function chooseOpponent() {
-// 	$(".passiveOpponent").click(function() {
-// 		$(this).addClass("activeOpponent");
-// 		$(this).removeClass("passiveOpponent");
-// 	});
-// };
-
-
-// chooseCharacter();
-// chooseOpponent();
-
-
+	$("#hoth").click(function() {
+		$("body").css("background-image", "url('hoth.jpg')");
+	});
+	$("#stardestroyer").click(function() {
+		$("body").css("background-image", "url('stardestroyer.jpg')");
+	});
+	$("#endor").click(function() {
+		$("body").css("background-image", "url('endor.jpg')");
+	});
 
 // This is the empty object that is populated with the player character's stats.
 var playerCharacter = {};
@@ -176,7 +179,23 @@ $("#luke").click(function() {
 		$(".characterDisplay").append(playerCharacter.name);
 		// This will be used later to make lukes health change when he fights.
 		healthToAppend = "lukeHealth";
-	// If this isn't the first character clicked (playerCharacter is already populated) make luke an opponent.
+
+		// $(".box").one("click", function() {
+		// 	$(this).removeClass("box");
+		// 	$(".characterspot").append($(this));
+		// 	$(".waitingzone").append($(".robotbox"));
+		// 	$(".waitingzone").append($(".vaderbox"));
+		// 	$(".waitingzone").append($(".emperorbox"));
+		// });
+
+		$(".box").click(function() {
+			$(".characterspot").append($(this));
+			$(".waitingzone").append($(".robotbox"));
+			$(".waitingzone").append($(".vaderbox"));
+			$(".waitingzone").append($(".emperorbox"));
+		});
+	}else if (playerCharacter == luke) {
+		return;
 	}else{
 		// Luke becomes the opponent.
 		opponent = luke;
@@ -186,6 +205,9 @@ $("#luke").click(function() {
 		$(".opponentDisplay").append(opponent.name);
 		// This will be used later to make lukes health change when he fights.
 		opponentHealthToAppend = "lukeHealth";
+		$(".box").click(function() {
+			$(".opponentspot").append($(this));
+		});
 	};
 });
 
@@ -194,11 +216,22 @@ $("#robot").click(function() {
 		playerCharacter = robot;
 		$(".characterDisplay").append(playerCharacter.name);
 		healthToAppend = "robotHealth";
+		$(".box").click(function() {
+			$(".characterspot").append($(this));
+			$(".waitingzone").append($(".lukebox"))
+			$(".waitingzone").append($(".vaderbox"))
+			$(".waitingzone").append($(".emperorbox"))
+		});
+	}else if (playerCharacter == robot) {
+		return;
 	}else{
 		opponent = robot;
 		$(".opponentDisplay").empty();
 		$(".opponentDisplay").append(opponent.name);
 		opponentHealthToAppend = "robotHealth";
+		$(".box").click(function() {
+			$(".opponentspot").append($(this));
+		});
 	};
 });
 
@@ -207,11 +240,22 @@ $("#vader").click(function() {
 		playerCharacter = vader;
 		$(".characterDisplay").append(playerCharacter.name);
 		healthToAppend = "vaderHealth";
+		$(".box").click(function() {
+			$(".characterspot").append($(this));
+			$(".waitingzone").append($(".lukebox"))
+			$(".waitingzone").append($(".robotbox"))
+			$(".waitingzone").append($(".emperorbox"))
+		});
+	}else if (playerCharacter == vader) {
+		return;
 	}else{
 		opponent = vader;
 		$(".opponentDisplay").empty();
 		$(".opponentDisplay").append(opponent.name);
 		opponentHealthToAppend = "vaderHealth";
+		$(".box").click(function() {
+			$(".opponentspot").append($(this));
+		});
 	};
 });
 
@@ -220,11 +264,22 @@ $("#emperor").click(function() {
 		playerCharacter = emperor;
 		$(".characterDisplay").append(playerCharacter.name);
 		healthToAppend = "emperorHealth";
+		$(".box").click(function() {
+			$(".characterspot").append($(this));
+			$(".waitingzone").append($(".lukebox"))
+			$(".waitingzone").append($(".robotbox"))
+			$(".waitingzone").append($(".vaderbox"))
+		});
+	}else if (playerCharacter == emperor) {
+		return;
 	}else{
 		opponent = emperor;
 		$(".opponentDisplay").empty();
 		$(".opponentDisplay").append(opponent.name);
 		opponentHealthToAppend = "emperorHealth";
+		$(".box").click(function() {
+			$(".opponentspot").append($(this));
+		});
 	};
 });
 
@@ -270,26 +325,36 @@ function reset() {
 	$(".robotbox").removeClass("hide");
 	$(".vaderbox").removeClass("hide");
 	$(".emperorbox").removeClass("hide");
+
+	$(".startingposition").append($(".lukebox"));
+	$(".startingposition").append($(".robotbox"));
+	$(".startingposition").append($(".vaderbox"));
+	$(".startingposition").append($(".emperorbox"));
+
+	$(".lukebox").addClass("box")
+
+	// $(".startingposition").append($(".box"));
 };
 
-var audioElement = document.createElement('audio');
-// var audioNumber = 1;
-// audioElement.setAttribute('src', 'audio.wav');
+// Making sound effects on attack
+	// var audioElement = document.createElement('audio');
+	// var audioNumber = 1;
+	// audioElement.setAttribute('src', 'audio.wav');
 
-function attackSound() {
-	audioNumber = Math.floor((Math.random() * 3) + 1);
-	console.log(audioNumber);
+	// function attackSound() {
+	// 	audioNumber = Math.floor((Math.random() * 3) + 1);
+	// 	console.log(audioNumber);
 
-	if (audioNumber == 1) {
-		audioElement.setAttribute('src', 'attack1.wav');
-	} else if (audioNumber == 2) {
-		audioElement.setAttribute('src', 'attack2.wav');
-	} else {
-		audioElement.setAttribute('src', 'attack3.wav');
-	};
+	// 	if (audioNumber == 1) {
+	// 		audioElement.setAttribute('src', 'attack1.wav');
+	// 	} else if (audioNumber == 2) {
+	// 		audioElement.setAttribute('src', 'attack2.wav');
+	// 	} else {
+	// 		audioElement.setAttribute('src', 'attack3.wav');
+	// 	};
 
-	audioElement.play();
-}
+	// 	audioElement.play();
+	// }
 
 
 function fight() {
@@ -306,18 +371,17 @@ function fight() {
 
 	opponent.health = (opponent.health - playerCharacter.currentAttackPower);
 	$(".combatLog").empty();
-	$(".combatLog").append("You attacked " + opponent.name + " for " + playerCharacter.currentAttackPower + " damage! <br>");
+	$(".combatLog").append("<p>You attacked " + opponent.name + " for " + playerCharacter.currentAttackPower + " damage! </p>");
 
 	// attackSound();
 
 	$("#"+opponentHealthToAppend).empty();
 	$("#"+opponentHealthToAppend).append(opponent.health);
-
 	playerCharacter.currentAttackPower += playerCharacter.baseAttackPower;
 
 	if (opponent.health <= 0) {
 		// alert("You defeated " + opponent.name + "!");
-		$(".combatLog").append("You defeated " +opponent.name + "! Choose another opponent!")
+		$(".combatLog").append("<p>You defeated " +opponent.name + "!</p>")
 		victoryCounter++;
 		$("."+opponent.id+"box").addClass("hide");
 		// clears your current opponent
@@ -333,9 +397,7 @@ function fight() {
 	};
 
 	playerCharacter.health = playerCharacter.health - opponent.counterAttackPower;
-	$(".combatLog").append(opponent.name + " attacked you back for " + opponent.counterAttackPower);
-	// $(".playerCharacter").append(playerCharacter.health);
-
+	$(".combatLog").append("<p>"+opponent.name + " attacked you back for " + opponent.counterAttackPower +"</p>");
 	$("#"+healthToAppend).empty();
 	$("#"+healthToAppend).append(playerCharacter.health);
 

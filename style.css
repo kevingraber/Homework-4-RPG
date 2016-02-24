@@ -1,6 +1,6 @@
 img {
-	width:150px;
-	height:150px;
+	width:125px;
+	height:125px;
 	border-radius: 100px
 }
 
@@ -32,10 +32,11 @@ img {
 	border-width:5px;
 }
 
-/*.box {
-	background-color: lightblue;
+.box {
+	/*background-color: lightblue;*/
+	/*border:2px solid black;*/
 }
-*/
+
 .hide {
 	display:hidden;
 }
@@ -55,3 +56,22 @@ img {
 .opponentDisplay {
 	height:25px;
 }
+
+body {
+	background-image: url("stardestroyer.jpg");
+	background-size:cover;
+/*	background-position: center;*/
+}
+
+/*h1, h2, p {
+	color:yellow;
+}
+
+*/
+
+h1, h2, p, button {
+	font-family: 'Audiowide', cursive;
+	/*color:white;*/
+	background-color: white;
+}
+
